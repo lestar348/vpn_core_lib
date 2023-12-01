@@ -38,7 +38,7 @@ data class XrayConfig(
     data class LogBean(val access: String,
                        val error: String,
                        var loglevel: String?,
-                       val dnsLog: Boolean? = null)
+                       var dnsLog: Boolean? = null)
 
     data class InboundBean(
         var tag: String,

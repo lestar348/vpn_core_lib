@@ -8,6 +8,11 @@ interface ILogSettings {
     var currentLogLevel: LogLevelModel
         get() = throw Exception("Doesn't implement")
         set(_) { }
+
+    var isDNSLogsEnable: Boolean
+        get() = throw Exception("Doesn't implement")
+        set(_) { }
     fun saveLogLevel(logLevelModel: LogLevelModel)
 
+    fun setDnsEnable(state: Boolean)
 }

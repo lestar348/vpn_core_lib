@@ -65,6 +65,8 @@ object XrayConfigUtil {
         v2rayConfig.log.loglevel = settingsStorage?.decodeString(ConfigurationConstants.PREF_LOGLEVEL)
             ?: "warning"
 
+        v2rayConfig.log.dnsLog = settingsStorage?.decodeBool(ConfigurationConstants.PREF_LOG_DNS_ENABLE, false)
+
         inbounds(v2rayConfig)
 
         httpRequestObject(outbound)
