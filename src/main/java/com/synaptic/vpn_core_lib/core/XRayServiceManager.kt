@@ -283,8 +283,8 @@ object XRayServiceManager {
     private fun showNotification() {
         val service = serviceControl?.get()?.getService() ?: return
 
-        val startMainIntent = Intent(service, VpnCorePlugin.shared.mainIntentClass)
-        //val startMainIntent = Intent(service, MainActivity::class.java)
+        val startMainIntent = VpnCorePlugin.startIntent //Intent(service, VpnCorePlugin.shared.mainIntentClass)
+        //val startMainIntent = Intent(service, VpnCorePlugin.mainActivityClass!!)
         val contentPendingIntent = PendingIntent.getActivity(service,
             NOTIFICATION_PENDING_INTENT_CONTENT, startMainIntent,
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT

@@ -1,7 +1,8 @@
 package com.synaptic.vpn_core_lib
 
 object ConfigurationConstants {
-    const val ANG_PACKAGE =BuildConfig.LIBRARY_PACKAGE_NAME
+    var ANG_PACKAGE : String? = null//"com.synaptic.xcorevpn"//BuildConfig.LIBRARY_PACKAGE_NAME
+    const val LIB_NAME = BuildConfig.LIBRARY_PACKAGE_NAME
     const val DIR_ASSETS = "assets"
 
     // Preferences mapped to MMKV

@@ -1,6 +1,8 @@
 package com.synaptic.vpn_core_lib
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.net.VpnService
 import android.util.Log
 import com.synaptic.vpn_core_lib.interfaces.VpnControl
@@ -10,21 +12,21 @@ import com.synaptic.vpn_core_lib.models.VpnState
 import com.synaptic.vpn_core_lib.setup.MmkvManager
 import com.synaptic.vpn_core_lib.setup.models.ServerAffiliationInfo
 import com.synaptic.vpn_core_lib.setup.models.ServerConfig
+import com.synaptic.vpn_core_lib.utils.ConfigurationParser
 import com.synaptic.vpn_core_lib.utils.Utils
-
 import com.tencent.mmkv.MMKV
 
 
 /** VpnCorePlugin */
-class VpnCorePlugin(context: Context, val mainIntentClass: Class<Any>) : VpnControl, VpnSettings {
+object VpnCorePlugin: VpnControl, VpnSettings {
 
-    init {
+    var startIntent: Intent? = null
+
+    fun initialize(context: Context){
         MMKV.initialize(context)
-        shared = this
-    }
-
-    companion object {
-        lateinit var shared: VpnCorePlugin
+        val activity = context as Activity
+        startIntent = activity.intent
+        ConfigurationConstants.ANG_PACKAGE = context.packageName
     }
 
     override var vpnState: VpnState = VpnState.Unknown
@@ -85,6 +87,11 @@ class VpnCorePlugin(context: Context, val mainIntentClass: Class<Any>) : VpnCont
     override fun selectServer(guid: String) = MmkvManager.selectServer(guid)
 
     override fun saveServer(guid: String, config: ServerConfig): String = MmkvManager.encodeServerConfig(guid, config)
+    override fun saverServer(config: String): String {
+        val serverConfig = ConfigurationParser.parseConfig(config)
+
+        return saveServer(serverConfig.subscriptionId, serverConfig)
+    }
 
     override fun removeServerConfig(guid: String) = MmkvManager.removeServer(guid)
 
