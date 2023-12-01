@@ -1,6 +1,7 @@
 package com.synaptic.vpn_core_lib.setup
 
 import com.google.gson.Gson
+import com.synaptic.vpn_core_lib.models.LogLevelModel
 import com.synaptic.vpn_core_lib.setup.models.ServerAffiliationInfo
 import com.synaptic.vpn_core_lib.setup.models.ServerConfig
 import com.synaptic.vpn_core_lib.setup.models.SubscriptionItem
@@ -28,7 +29,6 @@ object MmkvManager {
     private val serverStorage by lazy { MMKV.mmkvWithID(ID_SERVER_CONFIG, MMKV.MULTI_PROCESS_MODE) }
     private val serverAffStorage by lazy { MMKV.mmkvWithID(ID_SERVER_AFF, MMKV.MULTI_PROCESS_MODE) }
     private val subStorage by lazy { MMKV.mmkvWithID(ID_SUB, MMKV.MULTI_PROCESS_MODE) }
-
 
     fun decodeServerList(): MutableList<String> {
         val json = mainStorage?.decodeString(KEY_ANG_CONFIGS)
